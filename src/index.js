@@ -29,6 +29,8 @@ function switchCheckbox(evt) {
     replaceTheme(Theme.DARK, Theme.LIGHT);
   }
 }
+const replaceTheme = (oldTheme, newTheme) => {
+  refs.myBodyTheme.classList.remove(oldTheme);
   localStorage.setItem(STORAGE_KEY, newTheme);
   refs.myBodyTheme.classList.add(newTheme);
 };
