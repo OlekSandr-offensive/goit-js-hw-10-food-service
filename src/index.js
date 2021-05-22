@@ -24,27 +24,20 @@ refs.themeSwitchCheckbox.addEventListener('change', switchCheckbox);
 
 function switchCheckbox(evt) {
   if (refs.themeSwitchCheckbox.checked) {
-    switchColorDark();
+    replaceTheme(Theme.LIGHT, Theme.DARK);
   } else {
-    switchColorLight();
+    replaceTheme(Theme.DARK, Theme.LIGHT);
   }
 }
-
-function switchColorDark() {
-  refs.myBodyTheme.classList.remove(Theme.LIGHT);
-  localStorage.setItem(STORAGE_KEY, Theme.DARK);
-  refs.myBodyTheme.classList.add(Theme.DARK);
-}
-
-function switchColorLight() {
-  refs.myBodyTheme.classList.remove(Theme.DARK);
-  localStorage.setItem(STORAGE_KEY, Theme.LIGHT);
-  refs.myBodyTheme.classList.add(Theme.LIGHT);
-}
+  localStorage.setItem(STORAGE_KEY, newTheme);
+  refs.myBodyTheme.classList.add(newTheme);
+};
 
 function loadPage() {
   const currentTheme = localStorage.getItem(STORAGE_KEY);
-  refs.myBodyTheme.classList.add(currentTheme);
+  if (currentTheme) {
+    refs.myBodyTheme.classList.add(currentTheme);
+  }
 
   if (currentTheme === Theme.DARK) {
     refs.themeSwitchCheckbox.checked = true;
